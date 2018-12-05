@@ -37,8 +37,14 @@ function keyDeleter(obj){
 }
 
 
-
-
+function makeStudentsReport(data) {
+  let newArray =[];
+  for (let i = 0; i < data.length; i++) {
+   let student = data[i]; 
+   newArray.push(`${student.name}: ${student.grade}`);
+  }
+  return newArray;
+}
 
 
 
