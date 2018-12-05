@@ -32,7 +32,7 @@ const fullMealList = {
     'dinner', 'supper'
   ]
 };
-console.log(`A Hobbit's fourth meal is ${fullMealList.meals[3]}.`);
+//console.log(`A Hobbit's fourth meal is ${fullMealList.meals[3]}.`);
 
 // 4. Arrays of Objects
 let theArray = [
@@ -41,6 +41,48 @@ let theArray = [
   {name: 'Ron', jobTitle: 'Stay at home father'}
 ];
 
-theArray.forEach(function(object) {
-  console.log(`Name: ${object.name}, Job Title: ${object.jobTitle}`);
-});
+//theArray.forEach(function(object) {
+//  console.log(`Name: ${object.name}, Job Title: ${object.jobTitle}`);
+//});
+
+
+//5. Properties that aren't there
+for(let i=0; i<theArray.length; i++){
+  if(theArray[i].jobTitle !== 'boss'){
+    theArray[i].boss = 'Khari';
+  }
+}
+//theArray.forEach(function(object) {
+//  if(object.hasOwnProperty('boss')){
+//    console.log(`${object.jobTitle} ${object.name} reports to ${object.boss}.`);
+//  } else {
+//    console.log(`${object.jobTitle} ${object.name} doesn't report to anybody`);  
+//  }
+//});
+
+//6. Cracking the code
+function decode(word){
+  if(word[0] ==='a' || word[0] ==='b' || word[0] ==='c' || word[0] ==='d'){
+    var letterIndex = cipher[word[0]]-1;
+    return word[letterIndex];
+  } else{
+    return ' ';
+  }
+}
+var cipher = {
+  a: 2,
+  b: 3,
+  c: 4,
+  d: 5
+};
+function decodeWords(secret){
+  var message = '';
+  var decript = secret.split(' ');
+
+  decript.forEach(word => message += decode(word));
+
+  return message;
+}
+
+console.log(decodeWords('craft block argon meter bells brown croon droop'));
+
