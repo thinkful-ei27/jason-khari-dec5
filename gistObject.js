@@ -86,3 +86,30 @@ function decodeWords(secret){
 
 console.log(decodeWords('craft block argon meter bells brown croon droop'));
 
+// 7. Factory Functions with LOTR
+  function createCharacter (name, nickname, race, origin, attack, defense) {
+    this.name = name;
+    this.nickname = nickname;
+    this.race = race;
+    this.origin = origin; 
+    this.attack = attack;
+    this.defense = defense;
+  
+  return {
+    name, nickname, race, origin, attack, defense,
+    describe: function(){
+      return `${name} is a ${race} from ${origin}.`
+    },
+  }
+    createCharacter.prototype.evaluateFight= function(character1, character2) {
+      let mine = character1.attack - character2.defense;
+      if (mine < 0) mine = 0;
+      let yours = character2.attack - character1.defense;
+      if (yours <0) yours =0;
+      return `Your opponent takes ${mine} damage and you receive ${yours}`;
+    }
+  }
+
+const characters = ['Gandalf the White', 'gandalf', 'Wizard', 'Middle Earth ', 10, 6];
+
+
