@@ -103,11 +103,11 @@ function createCharacter (name, nickname, race, origin, attack, defense) {
   };
 }
 createCharacter.prototype.evaluateFight= function(character1, character2) {
-  let mine = character1.attack - character2.defense;
+  let mine = character2.attack - character1.defense;
   if (mine < 0) {mine = 0;}
-  let yours = character2.attack - character1.defense;
-  if (yours <0) {yours =0;}
-  return `Your opponent takes ${mine} damage and you receive ${yours}`;
+  let yours = character1.attack - character2.defense;
+  if (yours < 0) {yours = 0;}
+  return `Your opponent takes ${yours} damage and you receive ${mine}`;
 };
 
 
