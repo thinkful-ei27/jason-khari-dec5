@@ -84,32 +84,69 @@ function decodeWords(secret){
   return message;
 }
 
-console.log(decodeWords('craft block argon meter bells brown croon droop'));
+//console.log(decodeWords('craft block argon meter bells brown croon droop'));
 
 // 7. Factory Functions with LOTR
-  function createCharacter (name, nickname, race, origin, attack, defense) {
-    this.name = name;
-    this.nickname = nickname;
-    this.race = race;
-    this.origin = origin; 
-    this.attack = attack;
-    this.defense = defense;
+function createCharacter (name, nickname, race, origin, attack, defense) {
+  //this.name = name;
+  //this.nickname = nickname;
+  //this.race = race;
+  //this.origin = origin; 
+  //this.attack = attack;
+  //this.defense = defense;
   
   return {
     name, nickname, race, origin, attack, defense,
     describe: function(){
-      return `${name} is a ${race} from ${origin}.`
+      return `${name} is a ${race} from ${origin}.`;
     },
-  }
-    createCharacter.prototype.evaluateFight= function(character1, character2) {
-      let mine = character1.attack - character2.defense;
-      if (mine < 0) mine = 0;
-      let yours = character2.attack - character1.defense;
-      if (yours <0) yours =0;
-      return `Your opponent takes ${mine} damage and you receive ${yours}`;
+  };
+}
+createCharacter.prototype.evaluateFight= function(character1, character2) {
+  let mine = character1.attack - character2.defense;
+  if (mine < 0) {mine = 0;}
+  let yours = character2.attack - character1.defense;
+  if (yours <0) {yours =0;}
+  return `Your opponent takes ${mine} damage and you receive ${yours}`;
+};
+
+
+var characters = [
+  createCharacter('Gandalf the White', 'gandalf', 'Wizard', 'Middle Earth ', 10, 6),
+  createCharacter('Bilbo Baggins', 'bilbo', 'Hobbit', 'The Shire', 2, 1),
+  createCharacter('Frodo Baggins', 'frodo', 'Hobbit', 'The Shire', 3, 2),
+  createCharacter('Aragorn son of Arathorn', 'aragorn', 'Man', 'Dunnedain', 6, 8),
+  createCharacter('Legolas', 'legolas', 'Elf', 'Woodland Realm', 8, 5)
+];
+
+characters.push(createCharacter('Arwen Undomiel', 'arwen', 'Half-Elf', 'Rivendell', 9, 3));
+
+characters.find(item => item.nickname === 'aragorn').describe();
+
+var hobbits = characters.filter(item => item.race === 'Hobbit');
+
+var strength = characters.filter(item => item.attack > 5);
+
+function forgeWeapon(type, attack){
+  //this.type = type;
+  //this.attack = attack;
+
+  return {
+    type,
+    attack,
+    equip: function (character){
+      character.weapon = type;
+      character.attack += attack;
+      character.describe = function(){
+        return `${character.name} is a ${character.race} of ${character.origin} who uses ${type}`;
+      };
     }
-  }
+  };
+}
 
-const characters = ['Gandalf the White', 'gandalf', 'Wizard', 'Middle Earth ', 10, 6];
+var sting = forgeWeapon('Sting', 3);
 
+sting.equip(characters[2]);
 
+console.log(characters.find(item => item.nickname === 'frodo').describe());
+console.log(characters.find(item => item.nickname === 'frodo').attack);
